@@ -43,8 +43,8 @@ def lu_dec(n):
     u = np.zeros(n+1) 
 
 
-    A[0,0] = 2.0
-    A[0,1] = -1.0
+    A[0,0] = 2.0   #first row
+    A[0,1] = -1.0  #first row
     for i in range(1, n): #define our matrix
         A[i,i-1] = -1.0
         A[i,i] = 2.0
@@ -52,14 +52,14 @@ def lu_dec(n):
         ftilde[i] = hh*f(xi[i])  #to calculate RHS 
 
 
-    A[n,n-1] = -1.0 
-    A[n,n] = 2.0
+    A[n,n-1] = -1.0 #last row
+    A[n,n] = 2.0   #last row
     
     P, L, U = scipy.linalg.lu(A)   #built in function that gives us the the matrices L and U
     
     #below follows algorithm we found explained in the report and taken from the compendium by M. Hjorth-Jensen
     
-    y[0] = ftilde[0]
+    y[0] = ftilde[0] #initial cond
 
     #forward sub. of L gives y
     for i in range(1, n):
@@ -72,7 +72,7 @@ def lu_dec(n):
 
     return xi, u
 
-def plot(N): 
+def plot(N):  #func for plotting the LU
     xi,u = lu_dec(N)
     plt.plot(xi,u, '--', label = 'n=%d' %N)
     plt.ylabel('Solution')
@@ -81,7 +81,7 @@ def plot(N):
     plt.legend(loc='upper right', frameon=False)
     plt.legend(loc='upper right', frameon=False)
  
-def plot_exact(N):
+def plot_exact(N):    #and we want to compare with the analytical sol. 
     xi,u = lu_dec(N)
     exac = exact(N)
     plt.plot(xi, exac, label= 'Analytical'  )
@@ -91,7 +91,7 @@ plot(10**1)
 plot(10**2)
 plot(10**3)
 plot(10**4)
-plot_exact(10**4)
+plot_exact(10**4)  #still not sure of a better way of getting different Ns in the same plot, since neither linspace or a for loop works
 
 
 
@@ -102,8 +102,8 @@ xi,u = lu_dec(N)
 exac = exact(N)
 
 max_err = []
-abserr = np.abs((u[1:-1] - exac[1:-1])/exac[1:-1])
-abserr = np.log10(abserr) # the first element is always 0
+abserr = np.abs((u[1:-1] - exac[1:-1])/exac[1:-1]) #the first element is 0, we don't want to include that
+abserr = np.log10(abserr) 
 max_err.append(max(abserr))
 
 print("n = %i    epsilon = %f\n" % (N, max(abserr)))

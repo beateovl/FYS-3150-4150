@@ -70,6 +70,7 @@ class general:
         u[0] = 0.0       #dirichlet bounday conditions
         u[self.n] = 0.0  #dirichlet bounday conditions
         
+        #forward sub
         for i in range(1,self.n): 
             ab = a[i-1]/bstar[i-1]  # can be found in the calculation of both bstar and fstar, by calculating it here we save a flop
             bstar[i] = b[i] - c[i-1] * ab
@@ -77,6 +78,7 @@ class general:
         
         u[self.n-1] = fstar[self.n-1]/bstar[self.n-1] #to calculate u[i+1] in the next step
             
+        #backward sub
         for i in range(self.n-2, 0, -1):
             u[i] = (fstar[i] - u[i+1] * c[i])/bstar[i] #our solution
         return u
@@ -95,13 +97,15 @@ class general:
         fstar[0] = ftilde[0]
         
         u[0] = 0.0       #dirichlet
-        u[self.n] = 0.0
+        u[self.n] = 0.0  #dirichlet
             
+        #forward sub
         for i in range(1,self.n): 
                 fstar[i] = ftilde[i] + (fstar[i-1]/d[i-1])
                     
         u[self.n-1] = fstar[self.n-1]/d[self.n-1]
         
+        #backward sub
         for i in range(self.n-2, 0, -1):
                 u[i] = (fstar[i] + u[i+1])/d[i]
         return u
@@ -144,9 +148,10 @@ b = int(input('b='))
 c = int(input('c='))
 
 test = general(a,b,c,N)   #easier way to get plots of several values of n in one figure? Tried linspace, list, for loop, for n, but got an error message
-test.plot_special()
+test.plot_special()       #have to repeat the two first steps for each N you want in one plot
 test.plot_exact()
 plt.show()
+
 
 
 #test.plot_exact() #testing if the analytical solution is the same for all n

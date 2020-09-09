@@ -1,0 +1,25 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Hjorth-Jensen%
+}{%
+Hjorth-Jensen%
+}{%
+{\protect \APACyear {2015}}%
+}]{%
+stat}
+\APACinsertmetastar {%
+stat}%
+\begin{APACrefauthors}%
+Hjorth-Jensen, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2015}{August}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Computational Physics} {Computational physics}.{\BBCQ}
+\newblock
+
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}
